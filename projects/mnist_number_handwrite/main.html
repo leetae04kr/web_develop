@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>mnist 손글씨 숫자 입력</title>
+		<script src="./weights0.json"></script>
+		<script src="./weights1.json"></script>
+		<script src="./script.js"></script>
+		<style>
+			body {
+				background: white;
+			}
+
+			canvas#canvas {
+				border: 2px dotted #aaa;
+			}
+
+			div#elements {
+				position: absolute;
+			}
+
+			div#info {
+				width: 30em;
+			}
+
+			button#clearbutton {
+				color: #3FDA5C;
+				font-weight: bold;
+				font-size: 150%;
+			}
+		</style>
+	</head>
+	<body>
+		<canvas id="canvas"></canvas>
+		<div id="elements">
+			<button id="clearbutton">Clear</button>
+			<p>Guess: <span id="guess"></span></p>
+
+			<div id="info">
+				<p>mnist 숫자 손글씨</p>
+
+
+			</div>
+
+		</div>
+	</body>
+</html>
+

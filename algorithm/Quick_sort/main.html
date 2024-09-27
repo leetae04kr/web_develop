@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>퀵 정렬</title>
+    <meta charset="utf-8" />
+  </head> 
+  <body>
+    <form name="inputForm">
+        <div>
+            퀵 정렬
+        </div>
+        <div>
+            <input name="str" type="text" size="50" />
+            <input type="button" value="정렬하기" onClick="doSort()"/>
+        </div>
+    </form>
+    <form name="outputForm">
+        <div>
+            정렬 결과
+        </div>
+        <div>
+            <textarea name="result" rows="20" cols="50"></textarea>
+        </div>
+    </form>
+    <script>
+        function doSort() {
+            var inputForm = document.forms.inputForm;
+            var outputForm = document.forms.outputForm;
+            var ary = inputForm.str.value.split(",");
+            ary = ary.map(function (e) { return Number(e); });
+            outputForm.result.value = ary.join(' ') + '\n';
+            outputForm.result.value = outputForm.result.value + "---" + '\n';
+            quickSort(ary);
+            outputForm.result.value = outputForm.result.value + "---" + '\n';
+            printAry(ary);
+            outputForm.result.value = outputForm.result.value + "done!" + '\n';
+            // 함수 quickSort(ary)
+            //      입력: ary 정렬 전의 배열
+            //      출력: 없음(ary의 내용이 정렬됨)
+            function quickSort(ary) {
+                function sort(start, end) {
+                    if (start >= end) {
+                        return;
+                    }
+                    var left = start;
+                    var right = end;
+                    var ref = ary[Math.round((left + right) / 2)];
+                    while (left < right) {
+                        if (ary[left] >= ref) {
+                            while (right > left) {
+                                if (ary[right] <= ref) {
+                                    var n = ary[left];
+                                    ary[left] = ary[right];
+                                    ary[right] = n;
+                                    right = right - 1;
+                                    break;
+                                }
+                                right = right - 1;
+                            }
+                            printAry(ary);
+                        }
+                        left = left + 1;
+                    }
+                    if (ary[right] > ref) {
+                        sort(start, right - 1);
+                        sort(right, end);
+                    } else if (ary[right] < ref) {
+                        sort(start, right);
+                        sort(right + 1, end);
+                    } else {
+                        sort(start, right - 1);
+                        sort(right + 1, end);
+                    }
+                }
+                sort(0, ary.length - 1);
+            }
+            // 함수 printAry(ary)
+            //      입력: ary 표시할 배열
+            //      출력: 없음
+            function printAry(ary) {
+                outputForm.result.value = outputForm.result.value + ary.join(' ') + '\n';
+            }
+        }
+    </script>   
+  </body>
+</html>

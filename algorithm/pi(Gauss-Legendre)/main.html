@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>원주율 구하기(가우스=르장드르)</title>
+		<meta charset="utf-8" />
+	</head> 
+	<body>
+		<form name="inputForm">
+			<div>
+				반복횟수＝<input name="n" type="text" size="10"/></br>
+				<input type="button" name="calcButton" value="계산하기" onClick="calc()"/>
+			</div>
+		</form>
+		<form name="outputForm">
+			<div>
+				계산 결과→<input name="result" type="text" size="30"/>
+			</div>
+		</form>
+		<script>
+			function calc() {
+				var inputForm = document.forms.inputForm;
+				var n = parseInt(inputForm.n.value);
+				var a = 1;
+				var b = 1 / Math.sqrt( 2 );
+				var t = 1;
+				var x = 4;
+				var i = 0;
+				var y;
+				while (i < n) {
+					y = a;
+					a = (a + b) / 2;
+					b = Math.sqrt(y * b);
+					t = t - x * Math.pow(y - a, 2);
+					x = x * 2;
+					i = i + 1;
+				}
+				outputForm.result.value = Math.pow(a + b, 2) / t;
+				inputForm.calcButton.disabled = false;
+			}
+		</script>	
+	</body>
+</html>

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>해시값 계산</title>
+		<meta charset="utf-8" />
+	</head> 
+	<body>
+		<form name="inputOutputForm">
+			<table border="0">
+				<tr>
+					<td>
+						문자열
+					</td>
+					<td>
+						<input type="text" name="plaintext" size="80" />
+					</td>
+					<td>
+						<input type="button" value="클리어" onClick="clearAll()" />
+					</td>
+				</tr>
+				<tr>
+					<td>
+						해시값
+					</td>
+					<td>
+						<input type="text" name="hashvalue" size="80" readonly="true"/>
+					</td>
+				</tr>		
+			</table>
+			<div>
+				<input type="radio" name="algorithm" value="MD5" checked />MD5
+				<input type="radio" name="algorithm" value="SHA-1"/>SHA-1	
+				<input type="radio" name="algorithm" value="SHA-224"/>SHA-224	
+				<input type="radio" name="algorithm" value="SHA-256"/>SHA-256	
+			</div>
+			<div>
+				<input type="button" value="해시값 계산하기" onClick="doHash()"/>
+			</div>
+		</form>
+		<script src="./cryptojs/md5.js"></script>
+		<script src="./cryptojs/sha1.js"></script>
+		<script src="./cryptojs/sha224.js"></script>
+		<script src="./cryptojs/sha256.js"></script>
+		<script>
+			function doHash() {
+				var algorithm = "";
+				var rd = document.getElementsByName("algorithm");
+				for (var i = 0; i < rd.length; i　= i + 1) {
+					if (rd[i].checked) {
+						algorithm = rd[i].value;
+						break;
+					}
+				}
+				document.forms.inputOutputForm.hashvalue.value = 
+					hash(document.forms.inputOutputForm.plaintext.value,algorithm);
+			}
+			// 함수 hash(plaintext, algorithm)
+			// 		입력: plaintext 평문, algorithm 해시 알고리즘
+			// 		출력: 해시값
+			function hash(plaintext, algorithm) {			
+				switch (algorithm) {
+				case "MD5" :
+					return CryptoJS.MD5(plaintext);
+				case "SHA-1":
+					return CryptoJS.SHA1(plaintext);
+				case "SHA-224":
+					return CryptoJS.SHA224(plaintext);
+				case "SHA-256":
+					return CryptoJS.SHA256(plaintext);
+				case "SHA-384":
+					return CryptoJS.SHA384(plaintext);
+				case "SHA-512":
+					return CryptoJS.SHA512(plaintext);
+				}
+			}
+			function clearAll() {
+				document.forms.inputOutputForm.plaintext.value = "";
+				document.forms.inputOutputForm.hashvalue.value = "";			
+			}		
+		</script>	
+	</body>
+</html>

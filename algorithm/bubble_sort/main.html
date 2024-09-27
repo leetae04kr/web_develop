@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>버블 정렬</title>
+        <meta charset="utf-8" />
+    </head> 
+    <body>
+        <form name="inputForm">
+            <div>
+                버블 정렬
+            </div>
+            <div>
+                <input name="str" type="text" size="50" />
+                <input type="button" value="정렬하기" onClick="doSort()"/>
+            </div>
+        </form>
+        <form name="outputForm">
+            <div>
+                정렬 결과
+            </div>
+            <div>
+                <textarea name="result" rows="20" cols="50"></textarea>
+            </div>
+        </form>
+        <script>
+            function doSort() {
+                const inputForm = document.forms.inputForm;
+                const outputFrom = document.forms.outputForm;
+                let ary = inputForm.str.value.split(",");
+                ary = ary.map(function (e) { return Number(e); });
+                outputForm.result.value = ary.join(' ') + '\n';
+                outputForm.result.value = outputForm.result.value + "---" + '\n';
+                bubbleSort(ary);
+                outputForm.result.value = outputForm.result.value + "---" + '\n';
+                printAry(ary);
+                outputForm.result.value = outputForm.result.value + "done!" + '\n';
+                // 함수 bubbleSort(ary)
+                //      입력: ary 정렬 전의 배열
+                //      출력: 없음(ary의 내용이 정렬됨)
+                function bubbleSort(ary) {
+                    let i = 0;
+                    while (i < ary.length - 1)  {
+                        let j = 0;
+                        while (j < ary.length - i - 1) {
+                            if (ary[j] > ary[j + 1]) {
+                                let n = ary[j];
+                                ary[j] = ary[j + 1];
+                                ary[j + 1] = n;
+                            }
+                            j = j + 1;
+                            printAry(ary);
+                        }
+                        i = i + 1;
+                    }
+                }
+                // 함수 printAry(ary)
+                //      입력: ary 표시할 배열
+                //      출력: 없음
+                function printAry(ary) {
+                    outputForm.result.value = outputForm.result.value + ary.join(' ') + '\n';
+                }
+            }
+        </script>   
+    </body>
+</html>

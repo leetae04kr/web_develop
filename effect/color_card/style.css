@@ -1,0 +1,227 @@
+.portfolio {
+    margin-top: 1000px;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background: #e7e7e7;
+    height: 100vh;
+    display: flex;
+}
+
+
+
+.block-wrap {
+    width: 400px;
+    height: 360px;
+    background: #efefef;
+    border-bottom: 2px solid #c9c9c9;
+    box-shadow: inset 0 1px 0 #fcfcfc, 0 8px 8px -8px #c9c9c9, 0 12px 12px -8px #e2e2e2;
+    display: flex;
+    position: relative;
+    overflow: hidden;
+    justify-content: center;
+    border-radius: 8px;
+    margin: auto;
+}
+
+.block-col {
+  display: flex;
+  height: 100%;
+  margin: 0 12px;
+  width: 64px;
+  flex-shrink: 0;
+}
+
+.block {
+  height: 64px;
+  width: 100%;
+  border-radius: 8px;
+  margin: auto 0;
+  position: relative;
+  will-change: transform;
+}
+.block:not(.block--active) {
+  cursor: pointer;
+}
+.block:not(.block--active):hover, .block:not(.block--active).fake-hover {
+  transform: translateY(-12px);
+}
+.block:not(.block--active):hover:after, .block:not(.block--active).fake-hover:after {
+  content: "";
+  display: block;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  transform: scale(1.1) translateY(12px);
+}
+.block:not(.block--active):active {
+  transform: scale(0.9) translateY(-12px);
+}
+.block--active {
+  position: absolute;
+  left: 0;
+  z-index: 1;
+  height: 100%;
+  width: 100%;
+}
+.block--transition {
+  transition: transform 0.185s cubic-bezier(0.4, 0, 0, 1);
+}
+
+.block-content {
+  display: none;
+  padding: 24px;
+}
+.block--active .block-content {
+  display: block;
+}
+
+.block-content__header {
+  background: rgba(0, 0, 0, 0.1);
+  padding: 24px;
+  margin: -24px -24px 24px;
+  overflow: hidden;
+}
+
+.block-content__header__text {
+  will-change: transform;
+  margin: 0;
+  opacity: 0;
+  font-size: 2em;
+}
+.block--active .block-content__header__text {
+  animation: content-in 0.225s cubic-bezier(0, 0, 0.2, 1) forwards;
+  animation-delay: 0.15s;
+}
+
+.block-content__body {
+  will-change: transform;
+  opacity: 0;
+  font-size: 18px;
+  line-height: 1.333;
+  animation: content-in 0.245s cubic-bezier(0, 0, 0.2, 1) forwards;
+  animation-delay: 0.1s;
+  margin: 0 0 20px;
+}
+
+.block-content__button {
+  font-weight: bold;
+  background: rgba(255, 255, 255, 0.25);
+  display: inline-block;
+  padding: 16px;
+  border-radius: 4px;
+  color: rgba(255, 255, 255, 0.85);
+  animation: button-in 0.245s cubic-bezier(0, 0, 0.2, 1) forwards;
+  animation-delay: 0.2s;
+  opacity: 0;
+  cursor: pointer;
+}
+
+@keyframes content-in {
+  0% {
+    opacity: 0;
+    transform: translateY(128px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@keyframes button-in {
+  0% {
+    opacity: 0;
+    transform: translateY(64px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.one{
+  background: orange;
+  color: #410804;
+  border-top: 2px solid darkorange;
+}
+.one:not(.block--active) {
+  border-bottom: 2px solid orange;
+  box-shadow: 0 8px 8px -8px orange, 0 12px 12px -8px black;
+}
+.one.block--active {
+  background: snow;
+}
+.one .block-content__header {
+  background: orange;
+  color: white;
+}
+.one .block-content__button {
+  background: orange;
+  border-bottom: 2px solid orange;
+  border-top: 2px solid orange;
+}
+
+.two{
+  background: blue;
+  color: black;
+  border-top: 2px solid lightblue;
+}
+.two:not(.block--active) {
+  border-bottom: 2px solid blue;
+  box-shadow: 0 8px 8px -8px blue, 0 12px 12px -8px black;
+}
+.two.block--active {
+  background: snow;
+}
+.two .block-content__header {
+  background: blue;
+  color: white;
+}
+.two .block-content__button {
+  background: blue;
+  border-bottom: 2px solid darkblue;
+  border-top: 2px solid blue;
+}
+
+.three {
+  background: yellow;
+  color: #4c3e01;
+  border-top: 2px solid yellow;
+}
+.three:not(.block--active) {
+  border-bottom: 2px solid yellow;
+  box-shadow: 0 8px 8px -8px yellow, 0 12px 12px -8px black;
+}
+.three.block--active {
+  background: snow;
+}
+.three .block-content__header {
+  background: yellow;
+  color: black;
+}
+.three .block-content__button {
+  background: yellow;
+  border-bottom: 2px solid yellow;
+  border-top: 2px solid yellow;
+  color: black;
+}
+
+.four {
+    background: deepskyblue;
+    color: black;
+    border-top: 2px solid deepskyblue;
+  }
+  .four:not(.block--active) {
+    border-bottom: 2px solid deepskyblue;
+    box-shadow: 0 8px 8px -8px deepskyblue, 0 12px 12px -8px black;
+  }
+  .four.block--active {
+    background: snow;
+  }
+  .four .block-content__header {
+    background: deepskyblue;
+    color: white;
+  }
+  .four .block-content__button {
+    background: deepskyblue;
+    border-bottom: 2px solid blue;
+    border-top: 2px solid deepskyblue;
+  }

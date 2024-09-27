@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>암호화와 복호화(AES)</title>
+		<meta charset="utf-8" />
+	</head> 
+	<body>
+		<form name="inputOutputForm">
+			<div>
+				비밀번호:<input type="text" name="password" size="20" />
+				<input type="button" value="암호화하기↓" onClick="doEncryption()"/>
+				<input type="button" value="복호화하기↑" onClick="doDecryption()"/>	
+			</div>
+			<hr>
+			<div>
+				평문
+			</div>
+			<div>
+				<textarea name="plaintext" rows="5" cols="50" spellcheck="false"></textarea>
+			</div>
+			<div>
+				<input type="button" value="평문 클리어" onClick="clearPlaintext()"/>
+			</div>
+			<hr>
+			<div>
+				암호문(Base64)
+			</div>
+			<div>
+				<textarea name="ciphertext" rows="5" cols="50" spellcheck="false"></textarea>
+			</div>
+			<div>
+				<input type="button" value="암호문을 클리어" onClick="clearCiphertext()"/>
+			</div>		
+		</form>
+		<script src="./cryptojs/aes.js"></script>
+		<script>
+			function doEncryption() {
+				var inputOutputForm = document.forms.inputOutputForm;
+				inputOutputForm.ciphertext.value = 
+					encrypt(
+						inputOutputForm.plaintext.value,
+						inputOutputForm.password.value);
+			}
+		
+			function doDecryption() {
+				var inputOutputForm = document.forms.inputOutputForm;
+				inputOutputForm.plaintext.value = 
+					decrypt(
+						inputOutputForm.ciphertext.value,
+						inputOutputForm.password.value).toString(CryptoJS.enc.Utf8);		
+			}
+			
+			// 함수 encrypt(plaintext, password)
+			// 		입력: plaintext 평문, password 비밀번호
+			// 		출력: 암호화된 문자열
+			function encrypt(plaintext, password) {
+				return CryptoJS.AES.encrypt(plaintext,password);
+			}
+
+			// 함수 decrypt(ciphertext, password)
+			// 		입력: ciphertext 암호문, password 비밀번호
+			// 		출력: 평문
+			function decrypt(ciphertext, password) {
+				return CryptoJS.AES.decrypt(ciphertext, password);
+			}
+		
+			function clearPlaintext() {
+				document.forms.inputOutputForm.plaintext.value = "";
+			}	
+		
+			function clearCiphertext() {
+				document.forms.inputOutputForm.ciphertext.value = "";
+			}		
+		</script>	
+	</body>
+</html>

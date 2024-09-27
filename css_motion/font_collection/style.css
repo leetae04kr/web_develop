@@ -1,0 +1,83 @@
+
+
+.font-size{
+    background-color: lightsalmon;
+    margin-top: 0;
+    text-align: center;
+    margin-left:50px;
+    margin-right: 50px;
+}
+.font-width{
+    background-color: lightcyan;
+    margin-top: 0;
+    text-align: center;
+    margin-left:50px;
+    margin-right: 50px;
+}
+.font-style{
+    background-color: lightgoldenrodyellow;
+    margin-top: 0;
+    text-align: center;
+    margin-left:50px;
+    margin-right: 50px;
+    
+}
+
+
+
+.font1{
+    font-size: large;
+}
+.font2{
+    font-size: larger;
+}
+.font3{
+    font-size: medium;
+}
+.font4{
+    font-size: small;
+}
+.font5{
+    font-size:smaller;
+}
+.font6{
+    font-size:x-large;
+}
+.font7{
+    font-size: x-small;
+}
+.font8{
+    font-size:xx-large
+}
+.font9{
+    font-size:xx-small;
+}
+
+
+
+.width1{
+    font-weight:bold;
+}
+.width2{
+    font-weight:bolder;
+}
+.width3{
+    font-weight:lighter;
+}
+.width4{
+    font-weight:normal;
+}
+
+
+
+
+
+.style1{
+    font-style:italic;
+}
+.style2{
+    font-style:normal;
+}
+.style3{
+    font-style:oblique;
+}

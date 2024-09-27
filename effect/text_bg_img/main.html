@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="./style.css">
+    <title>Document</title>
+</head>
+<body>
+    <main class="wrapper">
+        <svg class="svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 800">
+            <defs>
+                <filter id="text">
+                    <feImage xlink:href="1.jpg" x="0" y="0" width="100%" height="100%" preserveAspectRatio="xMaxYMin slice" result="bg"/>
+                    <feComposite operator="in" in="bg" in2="SourceGraphic" result="text"/>
+                    <feOffset result="offOut" in="text" dx="2" dy="2" />
+                    <feColorMatrix result="matrixOut" in="offOut" type="matrix"
+          values="0.2 0 0 0 0 0 0.2 0 0 0 0 0 0.2 0 0 0 0 0 .5 0" />
+                    <feGaussianBlur result="blurOut" in="matrixOut" stdDeviation="2" />
+                    <feBlend in="text" in2="blurOut" mode="normal" />
+                </filter>
+                <filter id="image">
+                    <feImage xlink:href="1.jpg" x="0" y="0" width="100%" height="100%" preserveAspectRatio="xMaxYMin slice" result="bg2"/>
+                </filter>
+            </defs>
+        </svg>
+    
+        <div class="flood"></div>
+        <h1 class="text">
+        <span>이태영의 웹사이트에</span>
+        <span>오신것을 환영합니다</span>
+        <span>보이시는 사진이 이태영입니다</span>
+        <span>저는 이런 사람입니다</span>
+        <span>대건고 원화중 신흥초</span>
+        <span>출신이며</span>
+        <span>컴퓨터와 코딩을 사랑하며</span>
+        <span>파이썬을 할줄 알고</span>
+        <span>취미로 html을 하며</span>
+        <span>javascript도 배우고 있으며</span>
+        <span>다양한 컴퓨터 분야를 다뤄 보았습니다</span>
+        <span>저의 포트폴리오들을 보여 드리겠습니다</span>
+        <span>즐겁게 관람해 주세요</span> 
+
+        </h1>
+    </main>
+</body>
+</html>

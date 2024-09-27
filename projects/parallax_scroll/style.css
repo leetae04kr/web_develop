@@ -1,0 +1,17 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@900&display=swap');
+
+ .intro{
+  width:100%;
+  height:100%;
+  background:#ddd;
+  font-family: 'Montserrat', sans-serif;
+  font-size:99px;
+  text-align:center;
+
+}
+.fuck{
+  position: absolute;
+}
+.asdf{
+  margin-top: 1080px;
+}

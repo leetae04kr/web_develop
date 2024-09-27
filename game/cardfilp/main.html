@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Document</title>
+		<style>
+			.card {
+				display: inline-block;
+				margin-right: 20px;
+				margin-bottom: 20px;
+				width: 70px;
+				height: 100px;
+				perspective: 140px;
+			}
+
+			.card-inner {
+				position: relative;
+				width: 100%;
+				height: 100%;
+				text-align: center;
+				transition: transform 0.8s;
+				transform-style: preserve-3d;
+			}
+
+			.card.flipped .card-inner {
+				transform: rotateY(180deg);
+			}
+
+			.card-front {
+				background: navy;
+			}
+
+			.card-front,
+			.card-back {
+				position: absolute;
+				width: 100%;
+				height: 100%;
+				border: 1px solid black;
+				backface-visibility: hidden;
+			}
+
+			.card-back {
+				transform: rotateY(180deg);
+			}
+		</style>
+	</head>
+	<body>
+		<div id="wrapper"></div>
+		<!-- <button type="button">게임시작</button> -->
+		<script>
+			const $wrapper = document.querySelector('#wrapper');
+			// const $button = document.querySelector('button')
+			const total = 12;
+			const cardNumber = ['red', 'orange', 'yellow', 'green', 'white', 'pink'];
+			let copyNumber = cardNumber.concat(cardNumber); //12개 데이터를 가진 배열 생성
+			let shuffled = [];
+			let clickable = false;
+
+			let clickedCard = [];
+			let completed = [];
+
+			function shuffle() {
+				for (let i = 0; copyNumber.length > 0; i++) {
+					const randomIndex = Math.floor(Math.random() * copyNumber.length);
+					// const spliced = copyNumber.splice(randomIndex, 1);
+					// shuffled.push(spliced[0]);
+					shuffled = shuffled.concat(copyNumber.splice(randomIndex, 1));
+				}
+			}
+
+			function startGame() {
+				shuffle();
+				for (let i = 0; i < total; i++) {
+					const card = createCard(i);
+					$wrapper.append(card);
+					setTimeout(() => {
+						card.classList.add('flipped');
+					}, 1000 + 100 * i);
+					setTimeout(() => {
+						card.classList.remove('flipped');
+					}, 3000);
+					clickable = true;
+				}
+			}
+
+			function createCard(i) {
+				const card = document.createElement('div');
+				card.className = 'card';
+				const cardInner = document.createElement('div');
+				cardInner.className = 'card-inner';
+				const cardFront = document.createElement('div');
+				cardFront.className = 'card-front';
+				const cardBack = document.createElement('div');
+				cardBack.className = 'card-back';
+				cardBack.style.backgroundColor = shuffled[i];
+				cardInner.append(cardFront);
+				cardInner.append(cardBack);
+				card.append(cardInner);
+				card.addEventListener('click', onClickCard);
+				return card;
+			}
+
+			function onClickCard() {
+				if (!clickable || clickedCard[0] === this || completed.includes(this)) {
+					return;
+				}
+				this.classList.add('flipped');
+				clickedCard.push(this);
+				if (clickedCard.length !== 2) {
+					return; //2개가 아니면 return 때문에 함수가 그냥 종료된다.
+				}
+				if (
+					clickedCard[0].querySelector('.card-back').style.backgroundColor ===
+					clickedCard[1].querySelector('.card-back').style.backgroundColor
+				) {
+					completed.push(clickedCard[0]);
+					completed.push(clickedCard[1]);
+					clickedCard = [];
+					setTimeout(() => {
+						if (completed.length == 12) {
+							alert('ㅊㅋㅊㅋ');
+							resetGame();
+						}
+					}, 500);
+					return;
+				} else {
+					clickable = false;
+					//뒷면을 뒤집기도 전에 플립 클래스가 사라지는 것을 방지함.
+					setTimeout(() => {
+						clickedCard[0].classList.remove('flipped');
+						clickedCard[1].classList.remove('flipped');
+						clickedCard = [];
+						clickable = true;
+					}, 1000);
+				}
+			}
+
+			function resetGame() {
+				$wrapper.innerHTML = '';
+				copyNumber = cardNumber.concat(cardNumber); //12개 데이터를 가진 배열 생성
+				shuffled = [];
+				completed = [];
+				clickedCard = [];
+				clickable = false;
+				startGame();
+			}
+
+			startGame();
+		</script>
+	</body>
+</html>

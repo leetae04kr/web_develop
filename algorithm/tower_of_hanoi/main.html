@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>하노이의 탑</title>
+		<meta charset="utf-8" />
+	</head> 
+	<body>
+		<form name="inputOutputForm">
+			<div>
+				원반의 개수:<input type="text" name="saucer" size="5" />
+				<input type="button" name="play" value="실행하기" onClick="doHanoi()"/>
+			</div>
+			<hr>
+			<div>
+				실행결과
+			</div>
+			<div>
+				<textarea name="motion" rows="20" cols="50" spellcheck="false"></textarea>
+			</div>	
+		</form>
+		<script>
+
+			let start = new Date(); // 시작
+			/**하노이 탑을 세울수 있는곳은 abc 3군데 이며 from과 to 값에는 abc가 들어가게 되고 saucer 값에 입력값 이 들어가게 된다 입력값은 정수임  */
+			function doHanoi() {   /**화면 출력물에서 가져오는 함수*/
+				var inputOutputForm = document.forms.inputOutputForm;
+				inputOutputForm.motion.value = "";
+				var saucer = parseInt(inputOutputForm.saucer.value); 
+				inputOutputForm.play.disabled = true;
+				hanoi(saucer, "A", "C", "B");
+				inputOutputForm.play.disabled = false;
+			}
+		
+			function hanoi(saucer, from, to, rest) {
+				if (saucer === 0) {     /** 이부분이 종료 구문임*/
+					return;
+				}
+				hanoi(saucer - 1, from, rest, to);   /**saucer -1을 통해 재귀 사용*/
+				printMotion(saucer, from, to);
+				hanoi(saucer - 1, rest, to, from); /**	반복문 구연*/
+			}	
+
+
+
+			/**화면 출력 함수*/
+			function printMotion(saucer, from, to) {
+				document.forms.inputOutputForm.motion.value += 
+				"말뚝 " + from + " 원반" + saucer + "을(를), 말뚝 " + to + "로 이동한다\n";
+			}	
+
+
+			let end = new Date(); // 종료	
+			console.log(end - start); // 경과시간(밀리초)
+
+		</script>	
+	</body>
+</html>
